@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://2dybwaphmdri"]
+
+[ext_resource type="Texture2D" uid="uid://be4blbitpj3im" path="res://art/ayo-ptype-sprite-sheet.png" id="1_o43ht"]
+[ext_resource type="Script" path="res://AyoCharacterBody.gd" id="1_tk5vv"]
+[ext_resource type="Script" path="res://AyoSprite.gd" id="3_uk807"]
+
+[node name="Main" type="Node"]
+
+[node name="Ayo" type="CharacterBody2D" parent="."]
+position = Vector2(200, 200)
+script = ExtResource("1_tk5vv")
+
+[node name="AyoSprite" type="Sprite2D" parent="Ayo"]
+texture = ExtResource("1_o43ht")
+region_enabled = true
+region_rect = Rect2(18, 714, 25, 52)
+script = ExtResource("3_uk807")
