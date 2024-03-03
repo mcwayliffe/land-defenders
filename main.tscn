@@ -12,6 +12,7 @@ script = ExtResource("1_tk5vv")
 
 [node name="AyoSprite" type="Sprite2D" parent="Ayo"]
 texture = ExtResource("1_o43ht")
-region_enabled = true
+hframes = 13
+vframes = 21
 region_rect = Rect2(18, 714, 25, 52)
 script = ExtResource("3_uk807")
