@@ -9,6 +9,8 @@
 [node name="Ayo" type="CharacterBody2D" parent="."]
 position = Vector2(200, 200)
 script = ExtResource("1_tk5vv")
+FORWARD_SPEED = null
+BACKWARD_SPEED = null
 
 [node name="AyoSprite" type="Sprite2D" parent="Ayo"]
 texture = ExtResource("1_o43ht")
