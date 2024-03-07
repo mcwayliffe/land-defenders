@@ -16,3 +16,5 @@ hframes = 13
 vframes = 21
 region_rect = Rect2(18, 714, 25, 52)
 script = ExtResource("3_uk807")
+
+[connection signal="facing_changed" from="Ayo" to="Ayo/AyoSprite" method="_on_ayo_facing_changed"]
