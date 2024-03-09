@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var FORWARD_SPEED: float = 150.0
 @export var BACKWARD_SPEED: float = 75.0
 signal facing_changed(new_facing: int)
+signal weapon_location(my_pos: Vector2, direction: Vector2)
 const EPSILON = 0.0001
 
 var player_facing: int = PlayerFacing.FACING_UP
@@ -48,5 +49,7 @@ func _physics_process(delta):
 		player_facing = new_facing
 
 	velocity = determine_velocity(player_facing)
+
+	weapon_location.emit(position, get_global_mouse_position())
 
 	move_and_slide()
