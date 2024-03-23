@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://2dybwaphmdri"]
+[gd_scene load_steps=7 format=3 uid="uid://2dybwaphmdri"]
 
 [ext_resource type="Texture2D" uid="uid://be4blbitpj3im" path="res://art/ayo-ptype-sprite-sheet.png" id="1_o43ht"]
 [ext_resource type="Script" path="res://AyoCharacterBody.gd" id="1_tk5vv"]
 [ext_resource type="Script" path="res://AyoSprite.gd" id="3_uk807"]
+[ext_resource type="Script" path="res://Node2D.gd" id="4_57tmc"]
 [ext_resource type="Script" path="res://Weapon.gd" id="4_b23tf"]
+[ext_resource type="Texture2D" uid="uid://cetdokmf8e2v8" path="res://art/stickball stick.png" id="5_7by5c"]
 
 [node name="Main" type="Node"]
 
@@ -20,8 +22,16 @@ vframes = 21
 region_rect = Rect2(18, 714, 25, 52)
 script = ExtResource("3_uk807")
 
-[node name="Weapon" type="CharacterBody2D" parent="."]
+[node name="Node2D" type="Node2D" parent="Ayo"]
+script = ExtResource("4_57tmc")
+
+[node name="Weapon" type="CharacterBody2D" parent="Ayo/Node2D"]
 script = ExtResource("4_b23tf")
 
+[node name="Sprite2D" type="Sprite2D" parent="Ayo/Node2D/Weapon"]
+rotation = 1.5708
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_7by5c")
+
 [connection signal="facing_changed" from="Ayo" to="Ayo/AyoSprite" method="_on_ayo_facing_changed"]
-[connection signal="weapon_location" from="Ayo" to="Weapon" method="_on_ayo_weapon_location"]
+[connection signal="weapon_location" from="Ayo" to="Ayo/Node2D/Weapon" method="_on_ayo_weapon_location"]
