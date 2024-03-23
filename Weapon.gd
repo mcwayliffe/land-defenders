@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const DIST = 50
+@export var DIST: int = 30
 
 func _physics_process(delta):
 	position = get_parent().get_local_mouse_position().normalized() * DIST

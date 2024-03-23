@@ -30,14 +30,19 @@ func determine_player_facing(mouse_pos: Vector2) -> int:
 	return facing
 
 func determine_velocity(facing: int) -> Vector2:
-	var mvmt_y: float = Input.get_axis("up", "down")
 	var mvmt_x: float = Input.get_axis("left", "right")
+	var mvmt_y: float = Input.get_axis("up", "down")
 	var mvmt_direction: Vector2 = Vector2(mvmt_x, mvmt_y)
-	var facing_direction: Vector2 = facing_vectors[facing]
 
-	if abs(facing_direction.angle_to(mvmt_direction)) > PI / 2 + EPSILON:
+	if facing == PlayerFacing.FACING_RIGHT and mvmt_x < 0:
 		return mvmt_direction * BACKWARD_SPEED
-	
+	elif facing == PlayerFacing.FACING_LEFT and mvmt_x > 0: 
+		return mvmt_direction * BACKWARD_SPEED	
+	elif facing == PlayerFacing.FACING_DOWN and mvmt_y < 0:
+		return mvmt_direction * BACKWARD_SPEED
+	elif facing == PlayerFacing.FACING_UP and mvmt_y > 0:
+		return mvmt_direction * BACKWARD_SPEED
+
 	return mvmt_direction * FORWARD_SPEED
 
 func _physics_process(delta):

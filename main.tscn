@@ -10,6 +10,7 @@
 [node name="Main" type="Node"]
 
 [node name="Ayo" type="CharacterBody2D" parent="."]
+y_sort_enabled = true
 position = Vector2(200, 200)
 script = ExtResource("1_tk5vv")
 FORWARD_SPEED = null
@@ -23,12 +24,16 @@ region_rect = Rect2(18, 714, 25, 52)
 script = ExtResource("3_uk807")
 
 [node name="Node2D" type="Node2D" parent="Ayo"]
+y_sort_enabled = true
 script = ExtResource("4_57tmc")
 
 [node name="Weapon" type="CharacterBody2D" parent="Ayo/Node2D"]
+y_sort_enabled = true
 script = ExtResource("4_b23tf")
+DIST = 35
 
 [node name="Sprite2D" type="Sprite2D" parent="Ayo/Node2D/Weapon"]
+y_sort_enabled = true
 rotation = 1.5708
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_7by5c")
