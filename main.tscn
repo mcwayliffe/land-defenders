@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://2dybwaphmdri"]
+[gd_scene load_steps=11 format=3 uid="uid://2dybwaphmdri"]
 
 [ext_resource type="Texture2D" uid="uid://be4blbitpj3im" path="res://art/ayo-ptype-sprite-sheet.png" id="1_o43ht"]
 [ext_resource type="Script" path="res://AyoCharacterBody.gd" id="1_tk5vv"]
@@ -6,6 +6,15 @@
 [ext_resource type="Script" path="res://Node2D.gd" id="4_57tmc"]
 [ext_resource type="Script" path="res://Weapon.gd" id="4_b23tf"]
 [ext_resource type="Texture2D" uid="uid://cetdokmf8e2v8" path="res://art/stickball stick.png" id="5_7by5c"]
+[ext_resource type="Script" path="res://Locust.gd" id="7_kql5t"]
+[ext_resource type="Texture2D" uid="uid://p0eoebyrpq5l" path="res://art/Locusts_02-Sheet.png" id="8_s4vlq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yi24h"]
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3d6d"]
+radius = 13.0
+height = 42.0
 
 [node name="Main" type="Node"]
 
@@ -13,8 +22,6 @@
 y_sort_enabled = true
 position = Vector2(200, 200)
 script = ExtResource("1_tk5vv")
-FORWARD_SPEED = null
-BACKWARD_SPEED = null
 
 [node name="AyoSprite" type="Sprite2D" parent="Ayo"]
 texture = ExtResource("1_o43ht")
@@ -38,5 +45,33 @@ rotation = 1.5708
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_7by5c")
 
+[node name="Timer" type="Timer" parent="Ayo/Node2D/Weapon"]
+process_callback = 0
+wait_time = 1.316
+one_shot = true
+
+[node name="HitBox" type="CollisionShape2D" parent="Ayo"]
+position = Vector2(0, 12)
+shape = SubResource("CapsuleShape2D_yi24h")
+
+[node name="Locust" type="CharacterBody2D" parent="."]
+position = Vector2(79, 11)
+script = ExtResource("7_kql5t")
+metadata/_edit_group_ = true
+
+[node name="LocustSprite" type="Sprite2D" parent="Locust"]
+rotation = 4.71239
+texture = ExtResource("8_s4vlq")
+centered = false
+offset = Vector2(-49, -47)
+hframes = 62
+frame = 1
+
+[node name="HitBox" type="CollisionShape2D" parent="Locust"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_a3d6d")
+
 [connection signal="facing_changed" from="Ayo" to="Ayo/AyoSprite" method="_on_ayo_facing_changed"]
 [connection signal="weapon_location" from="Ayo" to="Ayo/Node2D/Weapon" method="_on_ayo_weapon_location"]
+[connection signal="timeout" from="Ayo/Node2D/Weapon/Timer" to="Ayo/Node2D/Weapon" method="_on_timer_timeout"]
+[connection signal="player_hit" from="Locust" to="Ayo" method="_on_player_hit"]

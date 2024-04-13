@@ -1,22 +1,26 @@
 extends CharacterBody2D
 
 @export var DIST: int = 30
-var is_attacking: bool = false
-var attack_timer: SceneTreeTimer
+var hurtBox
+var hurtBoxInstance: Node2D
+signal attack_finished
 
-func _draw():
-	if is_attacking:
-		draw_circle(position, 10, "#ffffff")
+func _ready():
+	hurtBox = preload("res://hurt_box.tscn")
 
 func _input(event):
 	if event is InputEventMouseButton:
-		is_attacking = true
-		attack_timer = get_tree().create_timer(1.0)
-		queue_redraw()
+		do_attack()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	position = get_parent().get_local_mouse_position().normalized() * DIST
 
-# func _on_ayo_weapon_location(my_pos:Vector2, direction:Vector2):
-# 	look_at(direction)
-# 	# pass # Replace with function body.
+func do_attack():
+	hurtBoxInstance = hurtBox.instantiate()
+	add_child(hurtBoxInstance)
+	$Timer.start()
+
+func _on_timer_timeout():
+	if hurtBoxInstance:
+		remove_child(hurtBoxInstance)
+		hurtBoxInstance.queue_free()

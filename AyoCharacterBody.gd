@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var FORWARD_SPEED: float = 150.0
 @export var BACKWARD_SPEED: float = 75.0
+@export var health: float = 100.0
 signal facing_changed(new_facing: int)
 signal weapon_location(my_pos: Vector2, direction: Vector2)
 const EPSILON = 0.0001
@@ -57,4 +58,9 @@ func _physics_process(delta):
 
 	weapon_location.emit(position, get_global_mouse_position())
 
-	move_and_slide()
+	var collision = move_and_collide(velocity * delta)
+
+func _on_player_hit():
+	health -= 20
+	if health <= 0:
+		print("Dead")
